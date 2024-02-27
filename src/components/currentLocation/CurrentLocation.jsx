@@ -12,6 +12,7 @@ import {
 } from "./locationServices";
 import { Box, Modal } from "@mui/material";
 import Input from "../Input";
+import MyLocationOutlinedIcon from "@mui/icons-material/MyLocationOutlined";
 
 const GeoLocation = () => {
   const [pincodeModal, setPincodeModal] = useState(false);
@@ -20,6 +21,7 @@ const GeoLocation = () => {
 
   const dispatch = useDispatch();
   const userLocation = useSelector((state) => state.geolocation.location);
+  console.log(userLocation);
   const userLocationFromApi = useSelector(
     (state) => state.geolocation.locationFromApi
   );
@@ -32,13 +34,14 @@ const GeoLocation = () => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 1200,
-    height: 600,
+    width: 900,
+    height: 500,
     overflow: "hidden",
     bgcolor: "background.paper",
     border: "none",
     outline: "none",
     boxShadow: 24,
+    borderRadius: "8px",
   };
 
   const getLocation = () => {
@@ -68,6 +71,12 @@ const GeoLocation = () => {
     const response = await fetchAddressByPincode(pin);
     if (response.status === 200) {
       dispatch(geoLocationDataFromPincode(response.data));
+      dispatch(
+        geoLocationData({
+          lat: response.data.results[0].geometry.location.lat,
+          long: response.data.results[0].geometry.location.lng,
+        })
+      );
       setPincodeModal(false);
     }
   };
@@ -116,14 +125,14 @@ const GeoLocation = () => {
       >
         <Box sx={style}>
           <div className="w-full h-full bg-white flex">
-            <div className="w-3/5 h-full overflow-hidden">
+            <div className="w-7/12 h-full overflow-hidden">
               <img
                 src="https://images.pexels.com/photos/35969/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="location"
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="w-2/5 p-4">
+            <div className="w-5/12 p-4">
               <div>
                 <div className="w-full items-center text-center justify-center text-3xl font-bold text-gray-800">
                   Location
@@ -150,17 +159,18 @@ const GeoLocation = () => {
                     </button>
                   </div>
                   <div className="w-full h-[0.2px] bg-slate-300"></div>
-                  {userLocationFromApi.length == 0 && (
+                  {
                     <div className="mb-4">
                       <button
                         type="button"
                         onClick={getLocation}
-                        className="bg-blue-500 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        className="bg-blue-500 mt-4 flex items-center gap-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                       >
+                        <MyLocationOutlinedIcon style={{ fontSize: "19px" }} />{" "}
                         Get Current Location
                       </button>
                     </div>
-                  )}
+                  }
                 </div>
               </div>
             </div>
@@ -169,7 +179,12 @@ const GeoLocation = () => {
       </Modal>
       {userLocationFromApi.length !== 0 ||
       userLocationFromPincode.length !== 0 ? (
-        <div className="flex items-center gap-1">
+        <div
+          onClick={() => {
+            setPincodeModal(true);
+          }}
+          className="flex items-center gap-1 cursor-pointer"
+        >
           <LocationOnIcon />
           {currentCity}
         </div>

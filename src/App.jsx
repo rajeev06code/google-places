@@ -7,9 +7,9 @@ import {
 } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import Homepage from "./pages/Homepage/Homepage";
-import DetailPage from "./components/detailPage/DetailPage";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import DetailPage from "./pages/detailPage/DetailPage";
 
 const App = () => {
   const router = createBrowserRouter([
