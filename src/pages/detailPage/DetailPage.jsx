@@ -48,7 +48,7 @@ const DetailPage = () => {
           culpa, beatae aliquid esse autem quae laudantium aliquam corporis
           unde?
         </div>
-        <GoogleMap latLong={userLocation} />
+        {/* <GoogleMap latLong={userLocation} /> */}
       </div>
     </div>
   );

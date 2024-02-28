@@ -21,9 +21,15 @@ const App = () => {
     {
       path: ":category",
       element: <ListingPage />,
+      children: [
+        {
+          path: "detail",
+          element: <DetailPage />,
+        },
+      ],
     },
     {
-      path: ":category/detail",
+      path: "/abc",
       element: <DetailPage />,
     },
   ]);

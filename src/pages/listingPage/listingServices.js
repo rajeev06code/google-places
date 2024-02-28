@@ -2,10 +2,10 @@ import axios from "axios";
 import { ApiUrl } from "../../apiUrl";
 const apiKey = import.meta.env.VITE_APP_GOOGLE_API_KEY;
 
-export const fetchListByCategory = async (category, latLong) => {
+export const fetchListByCategory = async (category, latLong, name = "") => {
   try {
     const response = await axios.get(
-      `${ApiUrl.googlePlacesBaseUrl}/place/nearbysearch/json?key=${apiKey}&location=${latLong.lat},${latLong.lng}&radius=1500&type=${category}`
+      `${ApiUrl.googlePlacesBaseUrl}/place/nearbysearch/json?key=${apiKey}&location=${latLong.lat},${latLong.lng}&radius=3000&type=${category}&name=${name}`
     );
 
     return response;

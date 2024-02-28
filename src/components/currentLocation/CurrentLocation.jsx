@@ -11,7 +11,7 @@ import {
   fetchAddressByPincode,
 } from "./locationServices";
 import { Box, Modal } from "@mui/material";
-import Input from "../Input";
+import Input from "../ui/Input";
 import MyLocationOutlinedIcon from "@mui/icons-material/MyLocationOutlined";
 
 const GeoLocation = () => {
