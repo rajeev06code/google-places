@@ -10,6 +10,7 @@ import Homepage from "./pages/Homepage/Homepage";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import DetailPage from "./pages/detailPage/DetailPage";
+import ListingPage from "./pages/listingPage/ListingPage";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const App = () => {
     },
     {
       path: ":category",
+      element: <ListingPage />,
+    },
+    {
+      path: ":category/detail",
       element: <DetailPage />,
     },
   ]);

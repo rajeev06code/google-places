@@ -21,7 +21,6 @@ const GeoLocation = () => {
 
   const dispatch = useDispatch();
   const userLocation = useSelector((state) => state.geolocation.location);
-  console.log(userLocation);
   const userLocationFromApi = useSelector(
     (state) => state.geolocation.locationFromApi
   );
@@ -50,7 +49,7 @@ const GeoLocation = () => {
         dispatch(
           geoLocationData({
             lat: position.coords.latitude,
-            long: position.coords.longitude,
+            lng: position.coords.longitude,
           })
         );
       });
@@ -74,7 +73,7 @@ const GeoLocation = () => {
       dispatch(
         geoLocationData({
           lat: response.data.results[0].geometry.location.lat,
-          long: response.data.results[0].geometry.location.lng,
+          lng: response.data.results[0].geometry.location.lng,
         })
       );
       setPincodeModal(false);
@@ -84,7 +83,7 @@ const GeoLocation = () => {
   useEffect(() => {
     if (userLocation.lat === "") return;
     fetchAddress(userLocation);
-  }, [userLocation.lat, userLocation.long]);
+  }, [userLocation.lat, userLocation.lng]);
 
   useEffect(() => {
     if (
@@ -99,7 +98,6 @@ const GeoLocation = () => {
           city = component.long_name;
           break;
         }
-        console.log(city);
       }
       setCurrentCity(city);
     } else {

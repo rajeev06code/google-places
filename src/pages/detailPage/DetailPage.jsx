@@ -1,29 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { fetchCategoryDetails } from "./detailPageService";
 import Navbar from "../../components/Navbar/Navbar";
 import GoogleMap from "../../components/googleMap/GoogleMap";
 
 const DetailPage = () => {
-  const { category } = useParams();
-  const [categoryDetails, setCategoryDetails] = useState([]);
-
-  const userLocation = useSelector((state) => state.geolocation.location);
-
-  const fetchCategoryDetail = async (cat, location) => {
-    const response = await fetchCategoryDetails(cat, location);
-
-    if (response.status === 200) {
-      setCategoryDetails(response.data);
-    }
-  };
-
-  useEffect(() => {
-    if (userLocation.lat === "" || userLocation.long === "") return;
-    // fetchCategoryDetail(category, userLocation);
-  }, [userLocation.lat, userLocation.long]);
-
   return (
     <div className="w-full h-screen px-20 py-12 pt-20">
       <Navbar />

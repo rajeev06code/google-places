@@ -6,7 +6,7 @@ const apiKey = import.meta.env.VITE_APP_GOOGLE_API_KEY;
 export const fetchAddressByLatLong = async (location) => {
   try {
     const response = axios.get(
-      `${ApiUrl.googlePlacesBaseUrl}/geocode/json?latlng=${location.lat},${location.long}&key=${apiKey}`
+      `${ApiUrl.googlePlacesBaseUrl}/geocode/json?latlng=${location.lat},${location.lng}&key=${apiKey}`
     );
 
     return response;

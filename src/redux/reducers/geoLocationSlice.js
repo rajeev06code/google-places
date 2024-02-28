@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   location: {
     lat: "",
-    long: "",
+    lng: "",
   },
   locationFromApi: [],
   locationFromPincodeApi: []
@@ -15,7 +15,7 @@ const geoLocationSlice = createSlice({
   reducers: {
     geoLocationData(state, action) {
       state.location.lat = action.payload.lat;
-      state.location.long = action.payload.long;
+      state.location.lng = action.payload.lng;
     },
     geoLocationDataFromApi(state, action) {
       state.locationFromApi = action.payload;

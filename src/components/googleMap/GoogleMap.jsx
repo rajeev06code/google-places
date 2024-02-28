@@ -4,7 +4,7 @@ import { ApiUrl } from "../../apiUrl";
 
 const GoogleMap = ({ latLong }) => {
   const handleDirectionsClick = () => {
-    const destination = { lat: latLong.lat, lng: latLong.long };
+    const destination = { lat: latLong.lat, lng: latLong.lng };
 
     const directionUrl = `${ApiUrl.googleMapDirectionBaseUrl}/?api=1&destination=${destination.lat},${destination.lng}`;
 
@@ -13,7 +13,12 @@ const GoogleMap = ({ latLong }) => {
 
   return (
     <div>
-      <button onClick={handleDirectionsClick}>Get Directions</button>
+      <button
+        onClick={handleDirectionsClick}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"
+      >
+        Get Direction
+      </button>
     </div>
   );
 };
