@@ -1,5 +1,5 @@
 
-# Project Name- Googole places
+# Project Name- Google places
 
 ## Description
 This project is based on finding places using google API and frontend technology used here is Vite React .
