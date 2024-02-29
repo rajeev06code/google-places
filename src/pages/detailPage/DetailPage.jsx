@@ -20,7 +20,6 @@ const DetailPage = () => {
   const [detail, setDetail] = useState({});
   const apiKey = import.meta.env.VITE_APP_GOOGLE_API_KEY;
   const userLocation =
-    JSON.parse(localStorage.getItem("geoLoaction")) ||
     useSelector((state) => state.geolocation.location);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
@@ -177,7 +176,7 @@ const DetailPage = () => {
               </div>
               <div className="w-full h-auto overflow-hidden mt-6">
                 <MapContainer
-                  destination={{ lat: 12.903881, lng: 77.6012496 }}
+                  destination={detail?.geometry?.location}
                   location={userLocation}
                 />
               </div>

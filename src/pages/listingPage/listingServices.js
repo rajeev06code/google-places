@@ -10,7 +10,13 @@ export const fetchListByCategory = async (
 ) => {
   try {
     const response = await axios.get(
-      `${ApiUrl.googlePlacesBaseUrl}/place/nearbysearch/json?key=${apiKey}&location=${latLong.lat},${latLong.lng}&radius=3000&type=${category}&name=${name}&pagetoken=${nextPageToken}`
+      `${
+        ApiUrl.googlePlacesBaseUrl
+      }/place/nearbysearch/json?key=${apiKey}&location=${latLong.lat},${
+        latLong.lng
+      }&radius=3000&type=${category}&name=${
+        name ? name : category
+      }&pagetoken=${nextPageToken}`
     );
 
     return response;

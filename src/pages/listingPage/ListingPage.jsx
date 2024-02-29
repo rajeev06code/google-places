@@ -12,7 +12,7 @@ import { useDebounce } from "../../hooks/useDebounce";
 import Footer from "../../components/footer/Footer";
 
 const ListingPage = () => {
-  const { category } = useParams();// getting category name to call google places list api
+  const { category } = useParams(); // getting category name to call google places list api
   const navigate = useNavigate();
   const [categoryDetails, setCategoryDetails] = useState([]);
   const [nextPageToken, setNextPageToken] = useState("");
@@ -21,15 +21,12 @@ const ListingPage = () => {
   // implemented debaounce method for search with each key strokes
   const debouncedSearchTerm = useDebounce(searchTerm);
 
-  const userLocation =
-    JSON.parse(localStorage.getItem("geoLoaction")) ||
-    useSelector((state) => state.geolocation.location);// getting location lat and long from the redux store
+  const userLocation = useSelector((state) => state.geolocation.location); // getting location lat and long from the redux store
 
-// calling api for the list of places with details with pagination with next token
+  // calling api for the list of places with details with pagination with next token
   const fetchList = async (cat, location, name, nextToken, newData) => {
     const response = await fetchListByCategory(cat, location, name, nextToken);
     if (response.status === 200) {
-
       if (newData) {
         setCategoryDetails(response.data.results);
       } else {
@@ -44,14 +41,20 @@ const ListingPage = () => {
 
   useEffect(() => {
     if (userLocation.lat === "" || userLocation.lng === "") return;
-    fetchList(category, userLocation, debouncedSearchTerm, "", true);
+    fetchList(
+      category.split("-").join(" "),
+      userLocation,
+      debouncedSearchTerm,
+      "",
+      true
+    );
   }, [userLocation.lat, userLocation.lng, debouncedSearchTerm]);
 
   return (
     <>
       <div className="w-full h-auto md:px-20 px-4 py-12 md:pt-20 pt-24">
         <Navbar />
-        <div className="w-full h-full flex flex-col gap-5 md:px-52 px-4">
+        <div className="w-full h-full flex flex-col gap-5 md:px-30 px-4">
           <div>
             <Search
               className={"w-full"}
@@ -76,7 +79,7 @@ const ListingPage = () => {
                     />
                   </div>
                   <div className="md:w-8/12 w-full h-full flex flex-col gap-1 p-4">
-                    <div className="text-2xl font-bold text-gray-800">
+                    <div className="text-xl font-bold text-gray-800 text-ellipsis line-clamp-1">
                       {item.name}
                     </div>
                     <div className="text-gray-600 text-ellipsis line-clamp-2">
