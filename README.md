@@ -8,7 +8,7 @@ It utilizes the Google Places API to provide location-based services, such as se
 ## Installation
 1. Clone the repository.(git clone --branch [branch_name] --single-branch [remote-url])
 2. Navigate to the project directory.
-3. Run `npm install` to install dependencies.
+3. Run `yarn` to install dependencies.
 
 
 ## Usage
