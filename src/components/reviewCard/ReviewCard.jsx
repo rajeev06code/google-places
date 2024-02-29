@@ -14,9 +14,9 @@ const ReviewCard = ({ review }) => {
         />
       </div>
       <div className="px-4 py-2 w-11/12">
-        <div className="font-bold text-xl mb-2 flex items-center justify-between">
+        <div className="font-bold text-lg mb-2 flex md:flex-row flex-col md:items-center items-start justify-between">
           {review.author_name}
-          <span className="text-sm font-semibold text-gray-500 flex items-center gap-1">
+          <span className="text-sm font-semibold text-gray-500 flex md:flex-col flex-row items-center md:justify-center justify-between gap-1">
             <Rating
               style={{ fontSize: "17px" }}
               readOnly

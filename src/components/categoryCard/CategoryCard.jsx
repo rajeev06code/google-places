@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const CategoryCard = ({ data }) => {
     const navigate = useNavigate();
   return (
-    <div className="w-80 h-96 " onClick={() => navigate(data.link)}>
+    <div className="md:w-80 w-full h-96 " onClick={() => navigate(data.link)}>
       <div className="relative w-full h-3/5 overflow-hidden rounded-xl group">
         <div className="absolute text-center cursor-pointer group-hover:flex hidden transition-all duration-1000 ease items-center justify-center text-white z-20 top-0 bg-[#2b2b2b92] font-semibold p-2 -translate-1/2 w-full h-full">
           {data.description}

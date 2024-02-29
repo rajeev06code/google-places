@@ -20,7 +20,9 @@ const GeoLocation = () => {
   const [currentCity, setCurrentCity] = useState("");
 
   const dispatch = useDispatch();
-  const userLocation = useSelector((state) => state.geolocation.location);
+  const userLocation =
+    JSON.parse(localStorage.getItem("geoLoaction")) ||
+    useSelector((state) => state.geolocation.location);
   const userLocationFromApi = useSelector(
     (state) => state.geolocation.locationFromApi
   );
@@ -46,6 +48,13 @@ const GeoLocation = () => {
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
+        localStorage.setItem(
+          "geoLoaction",
+          JSON.stringify({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          })
+        );
         dispatch(
           geoLocationData({
             lat: position.coords.latitude,
@@ -70,12 +79,17 @@ const GeoLocation = () => {
     const response = await fetchAddressByPincode(pin);
     if (response.status === 200) {
       dispatch(geoLocationDataFromPincode(response.data));
+      localStorage.setItem("geoLoaction", {
+        lat: response.data.results[0].geometry.location.lat,
+        lng: response.data.results[0].geometry.location.lng,
+      });
       dispatch(
         geoLocationData({
           lat: response.data.results[0].geometry.location.lat,
           lng: response.data.results[0].geometry.location.lng,
         })
       );
+
       setPincodeModal(false);
     }
   };
@@ -121,18 +135,17 @@ const GeoLocation = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <div className="w-full h-full bg-white flex">
-            <div className="w-7/12 h-full overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:w-1/2 w-[90%] h-1/2  bg-white flex md:flex-row flex-col">
+            <div className="md:w-7/12 w-full h-full overflow-hidden">
               <img
                 src="https://images.pexels.com/photos/35969/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="location"
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="w-5/12 p-4">
+            <div className="md:w-5/12 w-full p-4">
               <div>
-                <div className="w-full items-center text-center justify-center text-3xl font-bold text-gray-800">
+                <div className="w-full items-center text-center justify-center md:text-3xl text-xl font-bold text-gray-800">
                   Location
                 </div>
                 <div>
@@ -173,7 +186,6 @@ const GeoLocation = () => {
               </div>
             </div>
           </div>
-        </Box>
       </Modal>
       {userLocationFromApi.length !== 0 ||
       userLocationFromPincode.length !== 0 ? (

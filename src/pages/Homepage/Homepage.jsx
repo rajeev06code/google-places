@@ -6,9 +6,9 @@ import { categoryList } from "../../utils/Constants";
 const Homepage = () => {
 
   return (
-    <div className="w-full h-screen px-20 py-12 pt-20">
+    <div className="w-full h-screen md:px-20 px-4 md:py-12 py-4 md:pt-20 pt-28">
       <Navbar />
-      <div className="grid grid-cols-4">
+      <div className="grid md:grid-cols-4 grid-cols-1">
         {categoryList.map((item) => (
           <CategoryCard data={item} />
         ))}

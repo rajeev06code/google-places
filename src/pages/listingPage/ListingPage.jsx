@@ -20,7 +20,11 @@ const ListingPage = () => {
   const apiKey = import.meta.env.VITE_APP_GOOGLE_API_KEY;
   const debouncedSearchTerm = useDebounce(searchTerm);
 
-  const userLocation = useSelector((state) => state.geolocation.location);
+  const userLocation =
+    JSON.parse(localStorage.getItem("geoLoaction")) ||
+    useSelector((state) => state.geolocation.location);
+
+  console.log(JSON.parse(localStorage.getItem("geoLoaction")));
 
   const fetchList = async (cat, location, name, nextToken, newData) => {
     const response = await fetchListByCategory(cat, location, name, nextToken);
@@ -44,9 +48,9 @@ const ListingPage = () => {
 
   return (
     <>
-      <div className="w-full h-auto px-20 py-12 pt-20">
+      <div className="w-full h-auto md:px-20 px-4 py-12 md:pt-20 pt-24">
         <Navbar />
-        <div className="w-full h-full flex flex-col gap-5 px-52">
+        <div className="w-full h-full flex flex-col gap-5 md:px-52 px-4">
           <div>
             <Search
               className={"w-full"}
@@ -55,11 +59,11 @@ const ListingPage = () => {
               placeholder={"Search"}
             />
           </div>
-          <div className="w-full grid grid-cols-2 gap-4">
+          <div className="w-full grid md:grid-cols-2 grid-cols-1 gap-4">
             {categoryDetails &&
               categoryDetails.map((item) => (
-                <div className="w-full h-52 bg-gray-100 border-[0.2px] flex gap-4 rounded-lg overflow-hidden hover:scale-[1.01] transition-all duration-200 ease-out">
-                  <div className="w-4/12 h-full">
+                <div className="w-full md:h-52 h:96 bg-gray-100 border-[0.2px] flex md:flex-row flex-col gap-4 rounded-lg overflow-hidden hover:scale-[1.01] transition-all duration-200 ease-out">
+                  <div className="md:w-4/12 w-full h-full">
                     <img
                       src={
                         item.photos
@@ -70,7 +74,7 @@ const ListingPage = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="w-8/12 h-full flex flex-col gap-1 p-4">
+                  <div className="md:w-8/12 w-full h-full flex flex-col gap-1 p-4">
                     <div className="text-2xl font-bold text-gray-800">
                       {item.name}
                     </div>
