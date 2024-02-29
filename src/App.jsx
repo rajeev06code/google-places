@@ -21,15 +21,9 @@ const App = () => {
     {
       path: ":category",
       element: <ListingPage />,
-      children: [
-        {
-          path: "detail",
-          element: <DetailPage />,
-        },
-      ],
     },
     {
-      path: "/abc",
+      path: "place/:placeId",
       element: <DetailPage />,
     },
   ]);
