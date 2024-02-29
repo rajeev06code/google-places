@@ -12,23 +12,24 @@ import { useDebounce } from "../../hooks/useDebounce";
 import Footer from "../../components/footer/Footer";
 
 const ListingPage = () => {
-  const { category } = useParams();
+  const { category } = useParams();// getting category name to call google places list api
   const navigate = useNavigate();
   const [categoryDetails, setCategoryDetails] = useState([]);
   const [nextPageToken, setNextPageToken] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const apiKey = import.meta.env.VITE_APP_GOOGLE_API_KEY;
+  // implemented debaounce method for search with each key strokes
   const debouncedSearchTerm = useDebounce(searchTerm);
 
   const userLocation =
     JSON.parse(localStorage.getItem("geoLoaction")) ||
-    useSelector((state) => state.geolocation.location);
+    useSelector((state) => state.geolocation.location);// getting location lat and long from the redux store
 
-  console.log(JSON.parse(localStorage.getItem("geoLoaction")));
-
+// calling api for the list of places with details with pagination with next token
   const fetchList = async (cat, location, name, nextToken, newData) => {
     const response = await fetchListByCategory(cat, location, name, nextToken);
     if (response.status === 200) {
+
       if (newData) {
         setCategoryDetails(response.data.results);
       } else {
@@ -82,6 +83,7 @@ const ListingPage = () => {
                       {item.vicinity}
                     </div>
                     <div className="flex items-center gap-1">
+                      {/* ratings components from the mui */}
                       <Rating
                         name="simple-controlled"
                         value={item.rating}
@@ -106,6 +108,7 @@ const ListingPage = () => {
               ))}
           </div>
           <div className="flex justify-center mt-8">
+            {/* Pagination of the list with google nextpagetoken */}
             {nextPageToken && (
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

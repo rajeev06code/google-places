@@ -30,6 +30,8 @@ const GeoLocation = () => {
     (state) => state.geolocation.locationFromPincodeApi
   );
 
+
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -44,10 +46,16 @@ const GeoLocation = () => {
     boxShadow: 24,
     borderRadius: "8px",
   };
-
+  
+// Getting lat and long from the browser api navigator.geolocation
   const getLocation = () => {
+    localStorage.removeItem("geoLoaction")
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
+        fetchAddress({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        })
         localStorage.setItem(
           "geoLoaction",
           JSON.stringify({
@@ -62,6 +70,7 @@ const GeoLocation = () => {
           })
         );
       });
+      window.location.reload()
     } else {
       setError("Geolocation is not supported by this browser.");
     }
@@ -72,6 +81,8 @@ const GeoLocation = () => {
     if (response.status === 200) {
       dispatch(geoLocationDataFromApi(response.data));
       setPincodeModal(false);
+      // window.location.reload()
+     
     }
   };
 
@@ -79,10 +90,10 @@ const GeoLocation = () => {
     const response = await fetchAddressByPincode(pin);
     if (response.status === 200) {
       dispatch(geoLocationDataFromPincode(response.data));
-      localStorage.setItem("geoLoaction", {
+      localStorage.setItem("geoLoaction", JSON.stringify({
         lat: response.data.results[0].geometry.location.lat,
         lng: response.data.results[0].geometry.location.lng,
-      });
+      }));
       dispatch(
         geoLocationData({
           lat: response.data.results[0].geometry.location.lat,
@@ -91,12 +102,16 @@ const GeoLocation = () => {
       );
 
       setPincodeModal(false);
+      window.location.reload()
     }
   };
 
   useEffect(() => {
-    if (userLocation.lat === "") return;
-    fetchAddress(userLocation);
+    // if(userLocation){
+      if (userLocation.lat === "") return;
+      fetchAddress(userLocation);
+    // }
+ 
   }, [userLocation.lat, userLocation.lng]);
 
   useEffect(() => {
@@ -187,8 +202,8 @@ const GeoLocation = () => {
             </div>
           </div>
       </Modal>
-      {userLocationFromApi.length !== 0 ||
-      userLocationFromPincode.length !== 0 ? (
+      {userLocationFromApi?.length !== 0 ||
+      userLocationFromPincode?.length !== 0 ? (
         <div
           onClick={() => {
             setPincodeModal(true);

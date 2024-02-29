@@ -6,14 +6,14 @@ This project is based on finding places using google API and frontend technology
 It utilizes the Google Places API to provide location-based services, such as searching for nearby places, displaying place details, and user reviews.
 
 ## Installation
-1. Clone the repository.
+1. Clone the repository.(git clone --branch [branch_name] --single-branch [remote-url])
 2. Navigate to the project directory.
-3. Run `yarn` to install dependencies.
+3. Run `npm install` to install dependencies.
 
 
 ## Usage
-1. Run 'yarn dev' to start the development server.
-2. Open your web browser and navigate to http://localhost:3000.
+1. Run 'npm run dev' to start the development server.
+2. Open your web browser and navigate to http://localhost:5173/.
 
 ## Technologies Used
 - vite-React (Javascript frontend library)

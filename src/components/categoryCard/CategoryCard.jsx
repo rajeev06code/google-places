@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const CategoryCard = ({ data }) => {
-    const navigate = useNavigate();
+    const navigate = useNavigate();// useNavigate used here to navigate between the pages on click.
   return (
     <div className="md:w-80 w-full h-96 " onClick={() => navigate(data.link)}>
       <div className="relative w-full h-3/5 overflow-hidden rounded-xl group">

@@ -15,7 +15,7 @@ import ModalWithSlider from "../../components/modalWithSlider/ModalWithSlider";
 import Footer from "../../components/footer/Footer";
 
 const DetailPage = () => {
-  const { placeId } = useParams();
+  const { placeId } = useParams();// getting placeid from the router params to call google places details api
   const navigate = useNavigate()
   const [detail, setDetail] = useState({});
   const apiKey = import.meta.env.VITE_APP_GOOGLE_API_KEY;
@@ -24,6 +24,7 @@ const DetailPage = () => {
     useSelector((state) => state.geolocation.location);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
+// Fetching places details from google places details api
   const fetchAddressDetails = async (placeId) => {
     try {
       const response = await fetchDetail(placeId);
@@ -44,6 +45,7 @@ const DetailPage = () => {
     <>
       <div className="w-full h-screen md:px-20 px-4 py-12 md:pt-20 pt-24">
         <Navbar />
+        {/* modal for more photos */}
         <ModalWithSlider
           isOpen={isImageModalOpen}
           photos={detail.photos}
