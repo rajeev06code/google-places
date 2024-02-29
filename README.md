@@ -10,6 +10,9 @@ It utilizes the Google Places API to provide location-based services, such as se
 2. Navigate to the project directory.
 3. Run `yarn` to install dependencies.
 
+## Environmental setup
+1. Create .env file and copy all the variables from .env.example
+2. Add all the values.
 
 ## Usage
 Method-1:With build (recommended)
