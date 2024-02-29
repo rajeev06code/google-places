@@ -11,7 +11,7 @@ const ModalWithSlider = ({ isOpen, photos, setIsImageModalOpen }) => {
   const apiKey = import.meta.env.VITE_APP_GOOGLE_API_KEY;
   const [imageUri, setImageUri] = useState([]);
 
-  console.log(photos);
+
 
   useEffect(() => {
     if (!photos || photos.length == 0) return;
@@ -34,9 +34,9 @@ const ModalWithSlider = ({ isOpen, photos, setIsImageModalOpen }) => {
     <Modal
       open={isOpen}
       onClose={() => setIsImageModalOpen(false)}
-      className="fixed inset-0 flex items-center justify-center"
+      className="w-full h-full fixed inset-0 flex items-center justify-center "
     >
-      <div className="bg-white shadow-lg rounded-lg w-96 h-96">
+      <div className="bg-white shadow-lg rounded-lg md:w-[400px] h-auto w-full ">
         <div className="w-full h-full">
           <Carousel
             showThumbs={false}

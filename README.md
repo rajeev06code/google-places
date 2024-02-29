@@ -12,8 +12,15 @@ It utilizes the Google Places API to provide location-based services, such as se
 
 
 ## Usage
-1. Run 'npm run dev' to start the development server.
-2. Open your web browser and navigate to http://localhost:5173/.
+Method-1:With build (recommended)
+1. Run 'yarn run build' to create build file to run in dev server.
+2. Run 'yarn run preview' to start the dev server.
+3. Open your web browser and navigate to http://localhost:4173.
+4. Please use cors bypass extension to avoid cors error.
+
+Method-2:
+1. Run 'yarn run dev' to start the development server.
+2. Open your web browser and navigate to http://localhost:5173.
 
 ## Technologies Used
 - vite-React (Javascript frontend library)
